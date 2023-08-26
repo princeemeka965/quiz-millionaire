@@ -1,0 +1,6 @@
+.hid-box {
+  top: 0 !important;
+  opacity: 1 !important;
+  position: relative;
+  transition: all 2s ease-out;
+}

@@ -1,9 +1,13 @@
-const withMT = require("@material-tailwind/react/utils/withMT");
-
-module.exports = withMT({
-    content: ["./src/**/*.{js,jsx,ts,tsx}"],
-    theme: {
-        extend: {},
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.tsx"],
+  theme: {
+    extend: {
+      colors: {
+        skinYellow: '#FCC822'
+      }
     },
-    plugins: [],
-});
+  },
+  plugins: [],
+}
+
