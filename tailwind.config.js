@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        skinYellow: '#FCC822'
+        skinBlue: '#00DAF7',
+        popGray: '#8692A6'
       }
     },
   },

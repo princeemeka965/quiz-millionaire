@@ -1,6 +1,21 @@
-.hid-box {
-  top: 0 !important;
-  opacity: 1 !important;
-  position: relative;
-  transition: all 2s ease-out;
+.bg-books {
+  background: url("../public/books-pile.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh !important;
+}
+
+.div-right {
+  animation: fadeInRight 2s ease-in-out;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4000px);
+  }
+  to {
+    opacity: 1;
+  }
 }
