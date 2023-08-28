@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import InputField from "./components/InputField";
+import Button from "./components/Button";
 
 const HomePage = (): any => {
+  const [name, setName] = useState<string>("");
+  const [emptyError, setEmptyError] = useState<boolean>(false);
+
+  const handleNameChange = (data: string): void => {
+    setName(data);
+    setEmptyError(false);
+  };
+
+  const handleSubmit = (): void => {
+    if (name === "") {
+      setEmptyError(true);
+    } else {
+    }
+  };
+
   return (
     <>
       <div className="w-full h-full flex flex-col">
@@ -45,9 +62,9 @@ const HomePage = (): any => {
           <div className="flex w-1/2 flex-grow h-full p-10 bg-white">
             <div
               className="flex w-full flex-col justify-center"
-              style={{ height: "70vh" }}
+              style={{ height: "90vh" }}
             >
-              <div className="w-full flex justify-center">
+              <div className="w-full flex justify-center div-left">
                 <div className="w-3/5 flex flex-col">
                   <p className="text-3xl font-bold">
                     Welcome to Quiz Millionaire
@@ -56,7 +73,30 @@ const HomePage = (): any => {
                     Enter your name to get started
                   </p>
 
-                  <div className="my-8 flex flex-col"></div>
+                  <div className="w-full border flex my-8" />
+
+                  <div className="my-4 flex flex-col">
+                    <InputField
+                      label="Surname & Firstname"
+                      type="text"
+                      value={name}
+                      placeholder="Enter full name here"
+                      changeInput={handleNameChange}
+                    />
+                    {emptyError && (
+                      <p className="my-3 text-red-300 w-full font-bold text-center text-sm">
+                        Your full name is required
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="my-5 flex flex-col">
+                    <Button
+                      btnText="Login"
+                      class="bg-popGray rounded-full"
+                      submit={handleSubmit}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
