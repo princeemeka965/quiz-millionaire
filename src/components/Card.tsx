@@ -1,6 +1,6 @@
 interface CardProps {
   class: string;
-  children: any;
+  children?: any;
 }
 
 const Card = (props: CardProps) => {

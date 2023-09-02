@@ -13,7 +13,7 @@ const Button = (props: ButtonProps) => {
     <>
       <div className="w-full flex">
         <div
-          className={`w-full flex p-4 justify-center ${props.class}`}
+          className={`flex justify-center ${props.class}`}
           onClick={clickSubmit}
         >
           <button type="submit" className="w-full h-full items-center">
