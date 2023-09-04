@@ -26,9 +26,8 @@ const Search = (props: SearchProps): any => {
         </div>
         <div className="flex flex-col px-2 mx-1">
           <input
-            style={{ width: "260px" }}
+            style={{ width: "320px" }}
             type={props.type}
-            value={props.value}
             placeholder={props.placeholder}
             defaultValue={""}
           />
