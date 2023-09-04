@@ -12,6 +12,7 @@ let interval: any = null;
 const HomePage = (): any => {
   const [name, setName] = useState<string>("");
   const [emptyError, setEmptyError] = useState<boolean>(false);
+  const [disableBtn, setDisabled] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
 
   const auth = useAuth() as AuthContextType;
@@ -27,6 +28,7 @@ const HomePage = (): any => {
       setEmptyError(true);
     } else {
       createLoadingTimer();
+      setDisabled(true);
     }
   };
 
@@ -43,6 +45,7 @@ const HomePage = (): any => {
     clearInterval(interval);
     setTimeout(() => {
       setCount(0);
+      setDisabled(false);
       loader?.reset();
       auth.login(name);
     }, 1000);
@@ -95,7 +98,7 @@ const HomePage = (): any => {
                 </div>
               </div>
             </div>
-            <div className="flex lg:w-1/2 md:w-1/2 w-full flex-grow h-full p-10 bg-white">
+            <div className="flex lg:w-1/2 md:w-1/2 w-full flex-grow h-full lg:p-10 md:p-10 py-10 px-5 bg-white">
               <div className="flex w-full flex-col lg:justify-center md:justify-center quiz-block">
                 <div className="w-full flex justify-center div-left">
                   <div className="lg:w-3/5 md:w-3/5 w-full flex flex-col">
@@ -125,6 +128,7 @@ const HomePage = (): any => {
 
                     <div className="my-5 flex flex-col">
                       <Button
+                        disabled={disableBtn}
                         btnText="Login"
                         class="bg-popGray rounded-full w-full p-4"
                         submit={handleSubmit}

@@ -6,23 +6,14 @@ export default function Header(): any {
 
   return (
     <>
-      <div className="w-full flex py-4 px-10">
-        <div className="flex flex-col justify-center w-1/3">
-          <p className="text-2xl font-black text-popGray">Quiz Time</p>
+      <div className="w-full flex py-4 lg:px-10 md:px-10 px-3 fixed bg-white shadow-md">
+        <div className="lg:flex md:flex flex-col justify-center w-1/3">
+          <p className="text-2xl font-black text-popGray">Quiz Millionaire</p>
         </div>
-        <div className="flex flex-grow w-1/3">
-          <Search type="text" placeholder="Search" value="" />
+        <div className="lg:flex md:flex flex-grow w-1/3">
+          <Search type="text" placeholder="Search" value="" width={320} />
         </div>
-        {/*<div className="flex flex-grow mx-5 justify-center">
-          <div className="flex flex-col">
-            <Button
-              btnText="Start Quiz"
-              class="bg-popGray rounded-full py-2 px-6"
-              submit={auth.handleProceed}
-            />
-          </div>
-        </div>*/}
-        <div className="flex flex-grow w-1/3 justify-end">
+        <div className="lg:flex md:flex flex-grow w-1/3 justify-end">
           <div className="flex flex-row">
             <div className="flex flex-col justify-center">
               <img
