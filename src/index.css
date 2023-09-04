@@ -6,9 +6,20 @@
 
 body {
   font-family: Poppins;
-  overflow: hidden;
 }
 
 input {
   outline: none;
+}
+
+@media screen and (min-width: 1280px) {
+  .quiz-block {
+    height: 88vh;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .quiz-block {
+    min-height: 8vh;
+  }
 }

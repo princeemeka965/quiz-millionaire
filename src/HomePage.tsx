@@ -4,13 +4,18 @@ import InputField from "./components/InputField";
 import Button from "./components/Button";
 import { useAuth } from "./context/AuthContext";
 import { AuthContextType } from "./context/AuthContext";
-import SelectTopic from "./SelectTopic";
+import QuizInstruction from "./QuizInstruction";
+import { useLoader } from "./context/TopLoadingBar";
+
+let interval: any = null;
 
 const HomePage = (): any => {
   const [name, setName] = useState<string>("");
   const [emptyError, setEmptyError] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(0);
 
   const auth = useAuth() as AuthContextType;
+  const loader = useLoader();
 
   const handleNameChange = (data: string): void => {
     setName(data);
@@ -21,25 +26,46 @@ const HomePage = (): any => {
     if (name === "") {
       setEmptyError(true);
     } else {
-      auth.login(name);
+      createLoadingTimer();
     }
   };
+
+  const createLoadingTimer = (): any => {
+    if (count < 100) {
+      interval = setInterval(() => {
+        setCount((prevCounter) => prevCounter + 10);
+        loader?.increament(10);
+      }, 1000);
+    }
+  };
+
+  if (count === 100) {
+    clearInterval(interval);
+    setTimeout(() => {
+      setCount(0);
+      loader?.reset();
+      auth.login(name);
+    }, 1000);
+  }
 
   return (
     <>
       {auth.user === "" ? (
-        <div className="w-full h-full flex flex-col">
-          <div className="w-full h-full flex flex-row">
-            <div className="flex w-1/2 flex-grow h-full p-5 bg-books">
+        <div
+          className="w-full h-full flex flex-col"
+          style={{ overflow: "hidden" }}
+        >
+          <div className="w-full h-full flex lg:flex-row md:flex-row flex-col">
+            <div className="flex lg:w-1/2 md:w-1/2 w-full flex-grow h-full p-5 bg-books">
               <div className="flex w-full h-full flex-col justify-center">
                 <div className="flex flex-row justify-end">
-                  <div className="w-3/4 flex flex-col my-10 div-right">
+                  <div className="lg:w-3/4 md:w-3/4 w-full flex flex-col my-10 div-right">
                     <img
                       src="./quotes.png"
                       alt="quotes"
                       style={{ width: "28px" }}
                     />
-                    <div className="w-2/3 my-4">
+                    <div className="lg:w-2/3 md:w-2/3 w-full my-4">
                       <p
                         className="text-lg text-white ml-5"
                         style={{ lineHeight: "38px" }}
@@ -69,13 +95,10 @@ const HomePage = (): any => {
                 </div>
               </div>
             </div>
-            <div className="flex w-1/2 flex-grow h-full p-10 bg-white">
-              <div
-                className="flex w-full flex-col justify-center"
-                style={{ height: "90vh" }}
-              >
+            <div className="flex lg:w-1/2 md:w-1/2 w-full flex-grow h-full p-10 bg-white">
+              <div className="flex w-full flex-col lg:justify-center md:justify-center quiz-block">
                 <div className="w-full flex justify-center div-left">
-                  <div className="w-3/5 flex flex-col">
+                  <div className="lg:w-3/5 md:w-3/5 w-full flex flex-col">
                     <p className="text-3xl font-bold">
                       Welcome to Quiz Millionaire
                     </p>
@@ -114,7 +137,7 @@ const HomePage = (): any => {
           </div>
         </div>
       ) : (
-        <SelectTopic />
+        <QuizInstruction />
       )}
     </>
   );

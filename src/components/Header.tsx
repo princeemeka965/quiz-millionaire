@@ -6,7 +6,7 @@ export default function Header(): any {
 
   return (
     <>
-      <div className="w-full flex py-4 px-8">
+      <div className="w-full flex py-4 px-10">
         <div className="flex flex-col justify-center w-1/3">
           <p className="text-2xl font-black text-popGray">Quiz Time</p>
         </div>
@@ -22,7 +22,7 @@ export default function Header(): any {
             />
           </div>
         </div>*/}
-        <div className="flex flex-grow w-1/3 justify-center">
+        <div className="flex flex-grow w-1/3 justify-end">
           <div className="flex flex-row">
             <div className="flex flex-col justify-center">
               <img
