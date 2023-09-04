@@ -4,6 +4,7 @@ interface SearchProps {
   type: string;
   value: string;
   placeholder: string;
+  width: number;
 }
 
 const Search = (props: SearchProps): any => {
@@ -26,7 +27,7 @@ const Search = (props: SearchProps): any => {
         </div>
         <div className="flex flex-col px-2 mx-1">
           <input
-            style={{ width: "320px" }}
+            style={{ width: `${props.width}px` }}
             type={props.type}
             placeholder={props.placeholder}
             defaultValue={""}

@@ -1,7 +1,11 @@
-const SideNav = (): any => {
+interface SideNavProps {
+  class: string;
+}
+
+const SideNav = (props: SideNavProps): any => {
   return (
     <>
-      <div className="w-1/5 flex flex-col p-2">
+      <div className={`w-1/5 ${props.class} flex-col p-2`}>
         <div className="w-full my-2">
           <div className="bg-popGray w-full flex flex-row py-3 px-6 rounded-full">
             <div className="flex flex-col justify-center">
@@ -38,7 +42,9 @@ const SideNav = (): any => {
                 />
               </svg>
             </div>
-            <p className="text-lg text-grayText font-semibold mx-10">Support</p>
+            <p className="text-base text-grayText font-semibold mx-10">
+              Support
+            </p>
           </div>
 
           <div className="w-full flex flex-row py-3 px-6 my-6">
@@ -56,7 +62,7 @@ const SideNav = (): any => {
                 />
               </svg>
             </div>
-            <p className="text-lg text-grayText font-semibold mx-10">
+            <p className="text-base text-grayText font-semibold mx-10">
               Notification
             </p>
           </div>

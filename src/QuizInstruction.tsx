@@ -1,19 +1,49 @@
+import React, { useState } from "react";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import Header from "./components/Header";
-import SideNav from "./components/SideNav";
+import { useLoader } from "./context/TopLoadingBar";
+
+let interval: any = null;
 
 const QuizInstruction = (): any => {
-  const handleSubmit = (): void => {};
+  const [disableBtn, setDisabled] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(0);
+
+  const loading = useLoader();
+
+  const handleSubmit = (): void => {
+    createLoadingTimer();
+  };
+
+  const createLoadingTimer = (): void => {
+    setDisabled(true);
+
+    if (count < 100) {
+      interval = setInterval(() => {
+        setCount((previousState) => previousState + 10);
+        loading?.increament(10);
+      }, 1000);
+    }
+  };
+
+  if (count === 100) {
+    clearInterval(interval);
+    setTimeout(() => {
+      setCount(0);
+      setDisabled(false);
+      loading?.reset();
+    });
+  }
 
   return (
     <>
-      <Header />
-      <div className="w-full flex flex-col my-4 px-10">
-        <div className="w-full flex flex-row">
-          <SideNav />
-
-          <Card class="w-4/5 mx-3 p-3 flex flex-col rounded-3xl">
+      <div className="flex flex-col mb-24">
+        <Header />
+      </div>
+      <div className="w-full flex flex-col my-10 lg:px-10 md:px-10">
+        <div className="w-full flex flex-row justify-center">
+          <Card class="lg:w-4/5 md:w-4/5 w-full mx-3 p-3 flex flex-col rounded-3xl">
             <div className="w-full py-3 px-5 flex flex-col">
               <p className="text-2xl font-bold my-2 text-grayText">
                 Quiz Instructions
@@ -23,17 +53,17 @@ const QuizInstruction = (): any => {
               </p>
             </div>
             <div className="w-full py-3 px-5 flex flex-col">
-              <div className="flex flex-row w-full">
+              <div className="flex lg:flex-row md:flex-row flex-col w-full">
                 <img
                   src="../quiz-cover.jpg"
                   className="rounded-xl"
                   style={{ width: "450px" }}
                   alt="quiz-cover"
                 />
-                <div className="flex flex-col mx-3 px-14">
-                  <div className="flex flex-col h-16 justify-center">
+                <div className="flex flex-col lg:mx-3 md:mx-3 mx-1 my-2 lg:px-14 md:px-14">
+                  <div className="flex flex-col lg:h-16 md:h-16 h-10 justify-center">
                     <div className="flex flex-row">
-                      <p className="text-lg font-semibold text-grayText">
+                      <p className="lg:text-lg md:text-lg text-base font-semibold text-grayText">
                         Date:
                       </p>
                       <p
@@ -46,9 +76,9 @@ const QuizInstruction = (): any => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col h-16 justify-center">
+                  <div className="flex flex-col lg:h-16 md:h-16 h-10 justify-center">
                     <div className="flex flex-row">
-                      <p className="text-lg font-semibold text-grayText">
+                      <p className="lg:text-lg md:text-lg text-base font-semibold text-grayText">
                         Time Limit:
                       </p>
                       <p
@@ -60,9 +90,9 @@ const QuizInstruction = (): any => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col h-16 justify-center">
+                  <div className="flex flex-col lg:h-16 md:h-16 h-10 justify-center">
                     <div className="flex flex-row">
-                      <p className="text-lg font-semibold text-grayText">
+                      <p className="lg:text-lg md:text-lg text-base font-semibold text-grayText">
                         Attempts:
                       </p>
                       <p
@@ -74,9 +104,9 @@ const QuizInstruction = (): any => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col h-16 justify-center">
+                  <div className="flex flex-col lg:h-16 md:h-16 h-10 justify-center">
                     <div className="flex flex-row">
-                      <p className="text-lg font-semibold text-grayText">
+                      <p className="lg:text-lg md:text-lg text-base font-semibold text-grayText">
                         Points:
                       </p>
                       <p
@@ -91,8 +121,8 @@ const QuizInstruction = (): any => {
               </div>
             </div>
 
-            <div className="w-full py-3 px-5 my-2 flex flex-col">
-              <p className="text-lg font-semibold text-grayText">
+            <div className="w-full py-3 px-5 lg:my-2 md:my-2 flex flex-col">
+              <p className="lg:text-lg md:text-lg text-base font-semibold text-grayText">
                 Instructions
               </p>
               <div className="flex flex-col my-3">
@@ -114,6 +144,7 @@ const QuizInstruction = (): any => {
                   <div className="my-2 flex flex-col">
                     <Button
                       btnText="Start Quiz"
+                      disabled={disableBtn}
                       class="bg-popGray rounded-full w-full py-2 px-5"
                       submit={handleSubmit}
                     />
