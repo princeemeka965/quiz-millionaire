@@ -14,7 +14,10 @@ const QuizBlock = (): any => {
     handleQuizList(auth?.quizData);
   }, [auth?.quizData]);
 
-  const handleSubmit = (): void => {};
+  const handleSubmit = (): void => {
+    setDisabled(true);
+    setQuizCount((prevState) => prevState + 1);
+  };
 
   return (
     <>
