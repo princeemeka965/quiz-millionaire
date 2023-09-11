@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Card from "./components/Card";
 import Button from "./components/Button";
 import { useAuth } from "./context/AuthContext";
@@ -47,16 +47,19 @@ const QuizBlock = (): any => {
     }, 1000);
   };
 
-  const formatOptionsBlock = (count: number): void => {
-    const randomIndex: number = Math.floor(Math.random() * 4);
+  const formatOptionsBlock = useCallback(
+    (count: number): void => {
+      const randomIndex: number = Math.floor(Math.random() * 4);
 
-    auth?.quizData.slice(count, count + 1).forEach((quiz: any) => {
-      if (quiz?.incorrect_answers.length === 3) {
-        quiz?.incorrect_answers.splice(randomIndex, 0, quiz.correct_answer);
-        quiz.options = quiz?.incorrect_answers;
-      }
-    });
-  };
+      auth?.quizData.slice(count, count + 1).forEach((quiz: any) => {
+        if (quiz?.incorrect_answers.length === 3) {
+          quiz?.incorrect_answers.splice(randomIndex, 0, quiz.correct_answer);
+          quiz.options = quiz?.incorrect_answers;
+        }
+      });
+    },
+    [auth?.quizData]
+  );
 
   const formattedTimer = (value: number): string => {
     const minutes = Math.floor(value / 60);
