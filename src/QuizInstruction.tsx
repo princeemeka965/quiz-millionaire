@@ -10,6 +10,8 @@ import QuizBlock from "./QuizBlock";
 let interval: any = null;
 
 const QuizInstruction = (): any => {
+  window.scrollTo({ top: 0 });
+
   const [disableBtn, setDisabled] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
 
@@ -25,7 +27,7 @@ const QuizInstruction = (): any => {
 
     setTimeout(() => {
       axios
-        .get("https://opentdb.com/api.php?amount=1&type=multiple")
+        .get("https://opentdb.com/api.php?amount=20&type=multiple")
         .then((response) => {
           setCount(100);
           loading?.increament(100);
@@ -104,7 +106,7 @@ const QuizInstruction = (): any => {
                           className="text-base flex flex-col justify-center mx-3 text-grayText"
                           style={{ marginTop: 1 }}
                         >
-                          30 Mins
+                          10 Mins
                         </p>
                       </div>
                     </div>
