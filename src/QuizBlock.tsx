@@ -4,8 +4,6 @@ import Button from "./components/Button";
 import { useAuth } from "./context/AuthContext";
 
 const QuizBlock = (): any => {
-  window.scrollTo({ top: 0 });
-
   const auth = useAuth();
 
   const [quizList] = useState<{}[] | undefined>(auth?.quizData);
@@ -18,6 +16,7 @@ const QuizBlock = (): any => {
   useEffect(() => {
     timerCountDown();
     formatOptionsBlock(quizCount);
+    window.scrollTo({ top: 0 });
   }, []);
 
   const handleSubmit = (): void => {
