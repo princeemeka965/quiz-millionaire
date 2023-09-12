@@ -10,7 +10,7 @@ import QuizBlock from "./QuizBlock";
 let interval: any = null;
 
 const QuizInstruction = (): any => {
-  window.scrollTo({ top: 0 });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   const [disableBtn, setDisabled] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);

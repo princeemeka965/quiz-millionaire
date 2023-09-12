@@ -16,7 +16,7 @@ const QuizBlock = (): any => {
   useEffect(() => {
     timerCountDown();
     formatOptionsBlock(quizCount);
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const handleSubmit = (): void => {
@@ -101,7 +101,7 @@ const QuizBlock = (): any => {
             style={{ height: "100vh" }}
           >
             <div className="w-full flex justify-center">
-              <Card class="p-5 w-1/3 rounded-xl flex flex-col justify-center">
+              <Card class="p-5 lg:w-1/3 md:w-1/3 w-3/4 rounded-xl flex flex-col justify-center">
                 {score / 2 < 50 ? (
                   <>
                     <div className="w-full flex justify-center my-4">
