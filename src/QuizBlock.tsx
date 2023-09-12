@@ -5,10 +5,12 @@ import { useAuth } from "./context/AuthContext";
 
 const QuizBlock = (): any => {
   const auth = useAuth();
+  let interval: any = null;
 
   const [quizList] = useState<{}[] | undefined>(auth?.quizData);
   const [quizCount, setQuizCount] = useState<number>(0);
-  const [timer, setTimer] = useState<number>(600);
+  const [timer] = useState<number>(new Date().getTime() + 600 * 1000);
+  const [countDown, setCountdown] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
   const [answer, setStateAnswer] = useState<string>("");
   const [submit, setSubmit] = useState<boolean>(false);
@@ -42,8 +44,8 @@ const QuizBlock = (): any => {
   };
 
   const timerCountDown = (): void => {
-    setInterval(() => {
-      setTimer((prevState) => prevState - 1);
+    interval = setInterval(() => {
+      setCountdown(timer - new Date().getTime());
     }, 1000);
   };
 
@@ -62,10 +64,15 @@ const QuizBlock = (): any => {
   );
 
   const formattedTimer = (value: number): string => {
-    const minutes = Math.floor(value / 60);
-    const formattedMinutes = String(minutes).padStart(2, "0");
+    const minutes = Math.floor((value % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((value % (1000 * 60)) / 1000);
 
-    return `${formattedMinutes}`;
+    if (minutes === 0 && seconds === 0) {
+      console.log("me");
+      clearInterval(interval);
+    }
+
+    return `${minutes} mins ${seconds} secs`;
   };
 
   const setAnswer = (
@@ -168,7 +175,7 @@ const QuizBlock = (): any => {
 
                 <div className="py-3 px-5 flex flex-col">
                   <p className="text-2xl font-black my-2 text-grayText">
-                    Timer : {formattedTimer(timer)} minutes
+                    Timer : {formattedTimer(countDown)}
                   </p>
                 </div>
               </div>
