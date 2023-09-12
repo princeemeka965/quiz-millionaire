@@ -10,7 +10,7 @@ interface SearchProps {
 const Search = (props: SearchProps): any => {
   return (
     <>
-      <Card class="rounded-full p-2 flex">
+      <Card class="rounded-full p-2 flex border">
         <div className="flex flex-col w-max mx-2 justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

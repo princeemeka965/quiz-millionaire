@@ -57,7 +57,7 @@ export default function Header(): any {
         </div>
 
         <div className="lg:hidden md:hidden flex mx-5">
-          <Card class="w-10 h-10 flex justify-center rounded-full">
+          <Card class="w-10 h-10 flex justify-center border rounded-full">
             <span className="text-base py-2 font-semibold">
               {getInitials(auth.user)}
             </span>
